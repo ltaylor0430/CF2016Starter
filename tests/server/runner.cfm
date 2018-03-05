@@ -2,7 +2,7 @@
 <cfscript>
 
   testSuite = new mxunit.framework.TestSuite().TestSuite();
- //Todo: get all test in spec folder and provide mappings 
+ 
   currentDirectory = getDirectoryFromPath( getCurrentTemplatePath() );
   files = DirectoryList(currentDirectory & "spec",true,"path","*.cfc");
   files.map(function(item) {
