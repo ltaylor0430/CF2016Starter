@@ -3,8 +3,17 @@
 
   testSuite = new mxunit.framework.TestSuite().TestSuite();
  //Todo: get all test in spec folder and provide mappings 
-  testSuite.addAll( "spec.UserTest");
-  testSuite.addAll("spec.UserServiceTest");
+  currentDirectory = getDirectoryFromPath( getCurrentTemplatePath() );
+  files = DirectoryList(currentDirectory & "spec",true,"path","*.cfc");
+  files.map(function(item) {
+    var pathToFile = reMatch("spec([\s\S].*).cfc", item);
+    pathToFile[1] = replace(pathToFile[1], ".cfc" ,"");
+    var dotNotationPath = replace(pathToFile[1],"\", ".","all");
+   //add Tests to suite
+    testSuite.addAll(dotNotationPath);
+  }); 
+ /* testSuite.addAll( "spec.UserTest");
+  testSuite.addAll("spec.UserServiceTest");*/
 
 /*    Run the tests that have been added. This will include all the
     methods of the all the components that we added above  
