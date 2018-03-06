@@ -12,10 +12,8 @@
    //add Tests to suite
     testSuite.addAll(dotNotationPath);
   }); 
- /* testSuite.addAll( "spec.UserTest");
-  testSuite.addAll("spec.UserServiceTest");*/
-
-/*    Run the tests that have been added. This will include all the
+ 
+/*  Run the tests that have been added. This will include all the
     methods of the all the components that we added above  
 */  
   results = testSuite.run();

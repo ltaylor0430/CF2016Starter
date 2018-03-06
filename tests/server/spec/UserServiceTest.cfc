@@ -1,4 +1,4 @@
-component extends="mxunit.framework.TestCase" output="false" {
+component extends= "mxunit.framework.TestCase" output="false" {
   variables.userService = {};
   variables.userDbMock = new Mocks.UserDbMock();
   function setup() {
@@ -25,4 +25,4 @@ component extends="mxunit.framework.TestCase" output="false" {
    writeDump(users);
    assertTrue(users.RecordCount == 3, users.RecordCount & " not equal expected count of 3");
  }
-}
+}  

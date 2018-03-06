@@ -64,8 +64,29 @@
 
     <div class="test-item">
       <div class="title">
-        <h3>For Loops</h3>
-
+        <h3>Database Response - Selecting from Artist Table</h3>
+          <div class="flex-table">
+            <div class="flex-row">
+               <div class="flex-item table-header">First Name</div>
+               <div class="flex-item table-header">Last Name</div>
+               <div class="flex-item  table-header">Details</div>
+            </div>
+          <cfoutput query="dbUsersResults">
+           
+            <div class="flex-row">
+               <div class="flex-item">#firstname#</div>
+               <div class="flex-item">#lastName#</div>
+               <div class="flex-item"><button class="btn btn-primary">View Details</button></div>
+            </div>
+           
+          </cfoutput>
+           </div>
+           <div><h1>Serialize JSON Results</h1>
+           <blockquote>
+             <cfset test=serialize(dbUsersResults,"JSON",true)/>
+             <cfoutput>#test#</cfoutput>
+           </blockquote>
+           </div>
       </div>
   </section>
  
