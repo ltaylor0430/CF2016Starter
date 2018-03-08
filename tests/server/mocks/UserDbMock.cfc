@@ -5,8 +5,16 @@ component {
     return new Model.user.User("Test", "User");
   }
   public any function returnSingleUser() {
-    return QueryNew("id,firstName, lastName","Integer, VarChar, VarChar",
+    var singleUserList =  QueryNew("id,firstName, lastName","Integer, VarChar, VarChar",
     [{id:1,firstName:'John', lastName:'Doe'}]);
+    
+    var myQuery = new Query();
+    myQuery.setDBType("query");
+    myQuery.setAttributes(sourceQuery=singleUserList);
+    myQuery.setSQL("select * from sourceQuery order by id");
+     return myQuery.execute().getResult();
+    
+    
      // list 
   }
   public any function returnMultipleUsers() {

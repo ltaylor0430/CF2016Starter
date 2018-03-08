@@ -8,8 +8,8 @@
   <link href="https://fonts.googleapis.com/css?family=Mukta+Malar" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="main.css">
   <cfheader name="expires" value="#now()#">
-    <cfheader name="pragma" value="no-cache">
-      <cfheader name="cache-control" value="no-cache, no-store, must-revalidate">
+  <cfheader name="pragma" value="no-cache">
+  <cfheader name="cache-control" value="no-cache, no-store, must-revalidate">
 
 </head>
 
@@ -35,5 +35,9 @@
 
 </cftry>
 <cfinclude template="components.template.cfm"/>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+
 </body>
+
 </html>

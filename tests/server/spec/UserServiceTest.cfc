@@ -25,4 +25,20 @@ component extends= "mxunit.framework.TestCase" output="false" {
    writeDump(users);
    assertTrue(users.RecordCount == 3, users.RecordCount & " not equal expected count of 3");
  }
+
+ function testGettingUserDetails() {
+     injectMethod(userService,userDbMock,"returnSingleUser","dbQuery"); //spies
+   var userDetails = userService.getUserDetails("1");
+   writeDump(userDetails);
+   assertTrue(userDetails.RecordCount == 1,
+    userDetails.RecordCount & " not equal expected count of 1." & Serialize(userDetails,"JSON",true));
+   var indexOfFirstName = listFindNoCase(userDetails.ColumnList, "FIRSTNAME");
+  if (indexOfFirstName EQ 0) {
+    fail("Cannot find index to firstname in results");
+  } else {
+     var value = userDetails["FIRSTNAME"][1];
+    assertEquals("John", value, Serialize(userDetails,"JSON",true));
+  
+  }
+ }
 }  

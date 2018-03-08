@@ -1,14 +1,14 @@
- <!--- Define the application settings. --->
- component {
-   function onApplicationStart() {
-     //load coldbox, set application-wide variables, etc.
-   }
-   
-   function onApplicationEnd() {
-    
-   }
+component {
+  
+  public function onError(required any exception) {
+           if (isJsonResponseNeeded()) {
+             var remoteException = new model.exceptions.RemoteException();
+             remoteException.returnErrorResponse(arguments.exception.message & ' details: ' & arguments.exception.detail);
+            }
+           
 
-   function onSessionStart() {
-     
-   }
- }
+} 
+   private function isJsonResponseNeeded() {
+          return reFindNoCase("\.cfc$", CGI.script_name);
+        }
+}

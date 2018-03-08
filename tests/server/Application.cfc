@@ -59,7 +59,7 @@
         components for unit testing.
     --->
     <cfset this.mappings[ "/model" ] = (this.appDirectory & "model/") />
-
+ <cfset this.mappings[ "/controller" ] = (this.appDirectory & "controller/") />
   
 
 </cfcomponent>

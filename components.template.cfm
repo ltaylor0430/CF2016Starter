@@ -22,7 +22,7 @@
     </aside>
     <div class="test-item">
       <h1>Test Cold Fusion</h1>
-      <p>Just going to run through some basic Cold Fusion stuff, conditional statements, for loops, objects, try-catch.</p>
+      <p style="line-height:50px">Just going to run through some basic Cold Fusion stuff, conditional statements, for loops, objects, try-catch.</p>
 
       <h2>Conditional Statements with Script tags and form POST</h2>
 
@@ -61,7 +61,8 @@
         </div>
       </cfif>
     </div>
-
+ 
+ 
     <div class="test-item">
       <div class="title">
         <h3>Database Response - Selecting from Artist Table</h3>
@@ -76,13 +77,14 @@
             <div class="flex-row">
                <div class="flex-item">#firstname#</div>
                <div class="flex-item">#lastName#</div>
-               <div class="flex-item"><button class="btn btn-primary">View Details</button></div>
+               <div class="flex-item"><button class="btn btn-primary" onClick="onGetUserDetail('#ARTISTID#')">View Details</button></div>
             </div>
-           
+            <div data-artistDetail="#ARTISTID#-details" class="detail-output hidden">
+            </div>
           </cfoutput>
            </div>
            <div><h1>Serialize JSON Results</h1>
-           <blockquote>
+           <blockquote style="font-size:10px;height:300px;overflow:hidden;">
              <cfset test=serialize(dbUsersResults,"JSON",true)/>
              <cfoutput>#test#</cfoutput>
            </blockquote>
@@ -90,3 +92,47 @@
       </div>
   </section>
  
+ <script type="text/javascript">
+ function onGetUserDetail(artistId) {
+   
+   var output = "";
+   var detailView = $('div').find('[data-artistDetail=' + artistId + '-details]');
+   $.getJSON('./controller/UserController.cfc',{method:'getUserDetailsData',id:artistId}, function(data,status) {
+     output = data.result;
+     console.log(output);
+     var headers = addDetailHeaders( output.COLUMNS);
+     var rows =addDetailRows(output.DATA);
+     var table = '<table style="font-size:80%;width:100%">' + headers + rows + '</table>';
+     $(detailView).html('<div class="" style="word-wrap:break-word;width:100%;display:block;">' + table + '</div>');
+   }).fail( function(exception) {
+     var error = exception.responseJSON;
+     console.error(error);
+     alert('Unable to view details. ' + error.errors[0]);
+
+   });
+   
+ }
+ function addDetailHeaders(headerData) {
+   var headerRow = '<tr>';
+   _(headerData).map(function(header){
+      headerRow+= '<th>' + header +'</th>';
+   });
+   headerRow +="</tr>";
+   return headerRow;
+   
+ }
+  function addDetailRows(rowData) {
+   var row = '';
+   _(rowData).map(function(data){
+    row +='<tr>';
+    data.map(function(dataRow) {
+      row+= '<td>' + dataRow +'</td>';
+    });
+    row +="</tr>";
+   });
+     
+    
+   return row;
+   
+ }
+ </script>

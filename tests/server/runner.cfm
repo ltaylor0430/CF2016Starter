@@ -1,16 +1,27 @@
-<!--- Set up our test suite. --->
+
 <cfscript>
 
   testSuite = new mxunit.framework.TestSuite().TestSuite();
  
   currentDirectory = getDirectoryFromPath( getCurrentTemplatePath() );
+//currentDirectory = getDirectoryFromPath( './tests/server/' );
+
   files = DirectoryList(currentDirectory & "spec",true,"path","*.cfc");
+  writeDump(files);
+  
+     
   files.map(function(item) {
-    var pathToFile = reMatch("spec([\s\S].*).cfc", item);
+    var pathToFile = reMatch("spec([\s\S].*)\.cfc", item);
+    if (ISNull(pathToFile) ==false && ArrayLen(pathToFile) GTE 1) {
     pathToFile[1] = replace(pathToFile[1], ".cfc" ,"");
     var dotNotationPath = replace(pathToFile[1],"\", ".","all");
    //add Tests to suite
+   writeOutput(dotNotationPath & "<br/>");
+  
     testSuite.addAll(dotNotationPath);
+ 
+ 
+    }
   }); 
  
 /*  Run the tests that have been added. This will include all the
