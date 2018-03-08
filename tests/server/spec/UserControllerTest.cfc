@@ -5,7 +5,7 @@ component extends= "mxunit.framework.TestCase" output="false" {
   function getUserDetailTest() {
      userController.getUserDetailsData(1);
     
-
+ 
   }
  
 }

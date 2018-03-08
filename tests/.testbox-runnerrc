@@ -1,0 +1,6 @@
+{
+ "runner":"http://testcf.local/tests/testbox/system/runners/HTMLRunner.cfm",
+ 
+  "directory": "spec",
+  "recurse": true
+}
